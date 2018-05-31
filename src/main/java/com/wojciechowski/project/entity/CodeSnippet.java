@@ -25,7 +25,7 @@ public class CodeSnippet {
 	private int id;
 	
 	@NotNull(message="Title is required.")
-	@Length(min=5, max =20, message="Your title should be between 5 and 20 characters.")
+	@Length(min=5, max =40, message="Your title should be between 5 and 40 characters.")
 	@Column(name="title")
 	private String title;
 	
@@ -33,7 +33,7 @@ public class CodeSnippet {
 	@Column(name="text_field")
 	private String textField;
 	
-	@Length(max =20, message="Your description is optional but cannot be longer than 20 characters.")
+	@Length(max =40, message="Your description is optional but cannot be longer than 40 characters.")
 	@Column(name="description")
 	private String description;
 	
