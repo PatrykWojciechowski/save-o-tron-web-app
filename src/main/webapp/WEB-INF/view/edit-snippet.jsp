@@ -52,6 +52,7 @@
 			  </div>           
               <!--  form -->
 				 <form:form action="saveCodeSnippet" modelAttribute="newCodeSnippet" method="POST">
+				 <form:hidden path="id" />
 				  <div class="form-group">
 				    <label for="title" style="font-weight: bold">Title:</label>
 				    <form:input type="text" class="form-control" id="title" path="title"/>

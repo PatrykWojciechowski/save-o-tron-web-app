@@ -13,6 +13,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
@@ -42,7 +43,7 @@ public class CodeSnippet {
 	@Column(name="create_time")
 	private Date createTime;
 	
-	@CreationTimestamp
+	@UpdateTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="update_time")
 	private Date updateTime;
