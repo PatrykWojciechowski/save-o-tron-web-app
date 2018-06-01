@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Save-o-tron educational project</title>
+    <title>Save-o-tron</title>
     <!-- Bootstrap 4 css -->
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <!-- Custom styles for this template -->
@@ -38,6 +38,8 @@
 				I became interested in Java over a year ago and since then I am intensively learning programming.
 				I would like to change path of my career and became a Java developer in the future.
 				I also believe that working with projects like this will help me develop variety of skills.
+				<a href="https://github.com/PatrykWojciechowski" class="btn btn-dark" style="margin-top: 1rem;">
+				 <i class="fab fa-github"></i> Github account</a>
 		  </div>
 		  <p class="lead">
              <a href="${pageContext.request.contextPath}/" class="btn btn-md btn-secondary"><b>Go Back</b></a>

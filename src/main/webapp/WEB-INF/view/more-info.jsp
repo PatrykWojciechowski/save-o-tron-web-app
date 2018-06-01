@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Save-o-tron educational project</title>
+    <title>Save-o-tron</title>
     <!-- Bootstrap 4 css -->
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <!-- Custom styles for this template -->
@@ -34,13 +34,16 @@
             </div>
           </div>
 		<div class="jumbotron">
-				This web application was created only for educational purpouses and it's still in progress.<br/>
-				The main tasks of application:
+				This web application was created only for educational purpouses and it's still in progress. The main features of the application:
 				<ul>
-				<li>allow users to register and store informations about them in database</li>
-				<li>allow registered users to save their snippets of code in database</li>
-				<li>and more - depends on free time and motivation :)</li>
+				<li>allow visitors to login and register an account</li>
+				<li>allow users to perform CRUD operations on their code snippets<br>
+				(create, read, update, delete)</li>
+				<li>informations about users and code snippets are stored in  the database</li>
+				<li>and more stuff - coming soon!</li>
 				</ul>
+				 <a href="https://github.com/PatrykWojciechowski/save-o-tron-web-app" class="btn btn-dark">
+				 <i class="fab fa-github"></i> Application source code</a>
 		</div>
 		<p class="lead">
         	<a href="${pageContext.request.contextPath}/" class="btn btn-md btn-secondary"><b>Go Back</b></a>

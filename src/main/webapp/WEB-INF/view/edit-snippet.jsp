@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Save-o-tron</title>
+  <title>Edit code snippet</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Bootstrap 4 css -->
@@ -17,7 +17,7 @@
   <link href="${pageContext.request.contextPath}/resources/css/afterlogin.css" rel="stylesheet">
 </head>
 <body>
-	<div class="jumbotron text-center header" style="margin-bottom:0">
+	<div class="jumbotron text-center header">
 	  <h1><i class="far fa-save"></i> Save-o-tron</h1>
 	  <p>Now you can keep your code online! For Free!</p> 
 	</div>

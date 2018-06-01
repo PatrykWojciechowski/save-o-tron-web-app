@@ -3,7 +3,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<title>Login Page</title>
+	<title>Registration successful!</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- Reference Bootstrap files -->
@@ -21,7 +21,9 @@
 					<div class="panel-title">Sign In</div>
 				</div>
 				<div style="padding-top: 30px" class="panel-body">
-					<h4><i class="glyphicon glyphicon-ok"></i><b>Registration successful!</b></h4>
+					<div class="alert alert-success">
+					<i class="glyphicon glyphicon-ok"></i> Registration successful!
+		  			</div>
 				</div>
 			</div>
 			<p>

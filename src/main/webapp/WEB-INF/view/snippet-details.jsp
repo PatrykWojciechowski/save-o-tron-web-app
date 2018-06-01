@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Save-o-tron</title>
+  <title>Snippet details</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Bootstrap 4 css -->
@@ -22,7 +22,7 @@
   <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
-	<div class="jumbotron text-center header" style="margin-bottom:0">
+	<div class="jumbotron text-center header" >
 	  <h1><i class="far fa-save"></i> Save-o-tron</h1>
 	  <p>Now you can keep your code online! For Free!</p> 
 	</div>
@@ -87,25 +87,21 @@
 	  <div class="modal fade" id="myModal">
 	    <div class="modal-dialog modal-dialog-centered">
 	      <div class="modal-content">
-	      
 	        <!-- Modal Header -->
 	        <div class="modal-header">
 	          <h4 class="modal-title">Deleting ${tempSnippet.title}</h4>
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
 	        </div>
-	        
 	        <!-- Modal body -->
 	        <div class="modal-body">
 	        	Are you sure you want to delete this code snippet?
 	        </div>
-	        
 	        <!-- Modal footer -->
 	        <div class="modal-footer">
 	          <a href="${deleteLink}"
            		class="btn btn-danger" >Delete</a>
 	          <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
 	        </div>
-	        
 	      </div>
 	    </div>
 	  </div>
