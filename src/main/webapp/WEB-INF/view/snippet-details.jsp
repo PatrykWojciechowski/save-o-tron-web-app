@@ -1,6 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,7 +72,7 @@
           	<p>${tempSnippet.description}</p>
 	        	<pre class="codeSnippet"><code>${tempSnippet.textField}</code></pre> 
         	<div class="text-muted">   
-	        	Last edited on ${tempSnippet.updateTime}
+	        	Last edited on <fmt:formatDate value="${codeSnippet.updateTime}" pattern="yyyy-MM-dd HH:mm:ss" />
 			</div>
 		 </div>
 		</div>

@@ -37,7 +37,7 @@
 				Hi! I am Patryk and I am a student of Mechanical Engineering at University of Technology in Lublin.
 				I became interested in Java over a year ago and since then I am intensively learning programming.
 				I would like to change path of my career and became a Java developer in the future.
-				I also believe that working with projects like this will help me develop variety of skills.
+				I also believe that working with projects like this will help me develop variety of skills. <br>
 				<a href="https://github.com/PatrykWojciechowski" class="btn btn-dark" style="margin-top: 1rem;">
 				 <i class="fab fa-github"></i> Github account</a>
 		  </div>

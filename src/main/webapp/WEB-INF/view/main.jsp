@@ -1,6 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,7 +65,7 @@
               <a href="${showDetails}" class="btn btn-dark">Show more &rarr;</a>
             </div>
             <div class="card-footer text-muted">
-              Posted on ${codeSnippet.updateTime} by
+              Posted on <fmt:formatDate value="${codeSnippet.updateTime}" pattern="yyyy-MM-dd HH:mm:ss" /> by
               <a href="#"><security:authentication property="principal.username"/></a>
             </div>
           </div>
