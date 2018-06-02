@@ -35,10 +35,9 @@
           </div>
           <div class="inner cover">
            <h1 class="cover-heading"><b>Keep your code online for free!</b></h1>
-            <p class="lead"><b>On this website you can import your code and access it from
-             				everywhere in the world using any device (desktop or mobile).</b></p>
-             				
-            <p class="lead"><b>To get more information about this project click on the button below.</b></p>			
+            <p class="lead"><b>This website allow you to store your code online and access
+            	 it at any time and at any place with the use of any device (desktop or mobile)</b></p>             				
+            <p class="lead"><b>To get more information about this application, please click on the button below.</b></p>			
             <p class="lead">
               <a href="${pageContext.request.contextPath}/moreInfo" class="btn btn-md btn-secondary"><b>More info</b></a>
             </p>
