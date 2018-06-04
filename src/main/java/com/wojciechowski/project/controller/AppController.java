@@ -30,15 +30,15 @@ public class AppController {
 	}
 	
 	@GetMapping("/main")
-	public String showMainPage(Model theModel, Principal thePrincipal) {
-		
-		// get the user name
+	public String showMainPage(@RequestParam(value = "page", required = false) int page,
+				Model theModel, Principal thePrincipal) {
+		int startPage = (page - 2 > 0)?(page - 2):1;
+	    int endPage = startPage + 4;
+	    theModel.addAttribute("startpage", startPage);
+	    theModel.addAttribute("endpage", endPage);
         String theUserName = thePrincipal.getName();
-		
-		List<CodeSnippet> codeSnippets = codeSnippetService.getCodeSnippets(theUserName);
-		
+		List<CodeSnippet> codeSnippets = codeSnippetService.getCodeSnippets(theUserName, page);
 		theModel.addAttribute("codeSnippets", codeSnippets);
-				
 		return "main";
 	}
 	
