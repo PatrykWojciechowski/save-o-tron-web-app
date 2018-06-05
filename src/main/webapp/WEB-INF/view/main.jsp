@@ -76,16 +76,24 @@
       <c:set var = "nextPage" scope = "session" value = "${param.page+1}"/>
 	  <ul class="pagination mx-auto">
 		<c:if test="${param.page > 1}">
-	       <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/main/?page=1">First</a></li>
+	       	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/main/?page=1">First</a></li>
 	    </c:if>
 	    <c:if test="${param.page != 1}">
 	    	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/main/?page=${previousPage}">Previous</a></li>
 	    </c:if>
 		  <c:forEach begin="${startpage}" end="${endpage}" var="p">
-	         <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/main/?page=${p}">${p}</a></li>
-	    </c:forEach>
-	    <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/main/?page=${nextPage}">Next</a></li>
-	  </ul>
+		  	<c:if test="${p<=6}">
+		  			<li class="page-item 
+		  				<c:if test="${p==param.page}">
+		  						active
+		  				</c:if>
+		  			"><a class="page-link" href="${pageContext.request.contextPath}/main/?page=${p}">${p}</a></li>
+		  	</c:if>
+	         </c:forEach>
+	   <c:if test = "${param.page<6}">
+	   		<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/main/?page=${nextPage}">Next</a></li>
+	   </c:if>      
+	    </ul>
 	</div>
 	<!-- /. main container -->
 	</div>
