@@ -15,8 +15,8 @@
 <body>
 		<div class="container_fluid" >		
 		<div id="loginbox" style="margin-top: 50px;"
-			class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
-			<div class="panel panel-default">
+			class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+			<div class="panel panel-default panel-transparent">
 				<div class="panel-heading">
 					<div class="panel-title">Sign In</div>
 				</div>
