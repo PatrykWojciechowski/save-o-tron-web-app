@@ -34,13 +34,13 @@
             </div>
           </div>
 		<div class="jumbotron">
-				This web application was created only for educational purpouses and it's still in progress.
+				This web application was created only for educational purpouses and it is constantly updated.
 				The main features of the application are listed below:
 				<ul>
 				<li>it allows visitors to login and register an account</li>
 				<li>it allows users to perform CRUD operations on their code snippets<br>
 				(create, read, update, delete)</li>
-				<li>information about the users and code snippets are stored in  the database</li>
+				<li>information about the users and code snippets are stored in the database</li>
 				<li>and more features coming soon!</li>
 				</ul>
 				 <a href="https://github.com/PatrykWojciechowski/save-o-tron-web-app" class="btn btn-dark">

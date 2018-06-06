@@ -17,26 +17,20 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	//add a reference to our security data source
+	//a reference to our security data source
 	@Autowired
 	private DataSource securityDataSource;
 	
 	@Bean
 	public UserDetailsManager userDetailsManager() {
-		
-		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
-		
+		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();	
 		jdbcUserDetailsManager.setDataSource(securityDataSource);
-		
 		return jdbcUserDetailsManager;
 	}
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
-		//jdbc authentication
 		auth.jdbcAuthentication().dataSource(securityDataSource);
-		
 		/**
 		Test authentication
         auth.inMemoryAuthentication()
@@ -49,6 +43,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers("/").permitAll()
 		.antMatchers("/main/**").hasRole("USER")
+		.antMatchers("/add-new-snippet").hasRole("USER")
+		.antMatchers("/saveCodeSnippet").hasRole("USER")
+		.antMatchers("/show-details").hasRole("USER")
+		.antMatchers("/show-edit-form").hasRole("USER")
+		.antMatchers("/snippet-added-confirmation").hasRole("USER")
+		.antMatchers("/delete").hasRole("USER")
 		.and()
 		.formLogin().loginPage("/loginPage")
 		.loginProcessingUrl("/authenticateTheUser")

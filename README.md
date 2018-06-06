@@ -1,7 +1,7 @@
 # Save-o-tron
 
 This web application allow you to store your code online and access it at any time and at any place with the use of any device (desktop or mobile).
-The application is being constantly updated!
+This web application was created only for educational purpouses and it is constantly updated.
 
 ## About the app
 
@@ -10,9 +10,10 @@ The application was developed from scratch in Spring framework (full Java config
 
 ### Test the app
 
-- This application is available for the tests now!(hosted on AWS Elastic Beanstalk and Amazon RDS)
-- To test the app, click on the link below!
-- [Save-o-tron online](http://default-environment.pzfmzh5smt.us-east-2.elasticbeanstalk.com/)
+This application is available for the tests now!(hosted on AWS Elastic Beanstalk and Amazon RDS)
+To test the app, click on the link below!
+[Save-o-tron online](http://default-environment.pzfmzh5smt.us-east-2.elasticbeanstalk.com/)
+
 	
 ### Author
 
