@@ -42,9 +42,7 @@ public class RegistrationController {
 	
 	@GetMapping("/showRegistrationForm")
 	public String showRegistrationForm(Model theModel) {
-		
 		theModel.addAttribute("newUser", new NormalUser());
-		
 		return "registration-form";
 	}
 
@@ -56,7 +54,6 @@ public class RegistrationController {
 		
 		// form validation, to make sure the user doesn't enter any invalid data
 		if(theBindingResult.hasErrors()) {
-			
 			return "registration-form";
 		}
 		
@@ -65,7 +62,6 @@ public class RegistrationController {
 			theModel.addAttribute("newUser", new NormalUser());
 			theModel.addAttribute("userAlreadyExistsError",
 					"User with this username already exists.");
-			
 			return "registration-form";
 		}
 	
@@ -85,7 +81,6 @@ public class RegistrationController {
 		// save user in the database
 		userDetailsManager.createUser(tempUser);
 		
-		
 		return "registration-confirmation";
 	}
 	
@@ -96,7 +91,6 @@ public class RegistrationController {
 		
 		// check the database if the user already exists
 		boolean exists = userDetailsManager.userExists(userName);
-		
 		return exists;
 	}
 	

@@ -14,17 +14,13 @@ import com.wojciechowski.project.entity.CodeSnippet;
 @Repository
 public class CodeSnippetDAOImpl implements CodeSnippetDAO {
 
-	private static final int LIMIT_RESULTS_PER_PAGE = 1;
-	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
 	@Override
-	public List<CodeSnippet> getCodeSnippets(String username, int page) {
+	public List<CodeSnippet> getCodeSnippets(String username) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query query = currentSession.createQuery("from CodeSnippet where username = :username");
-		query.setFirstResult((page-1) * LIMIT_RESULTS_PER_PAGE); 
-		query.setMaxResults(LIMIT_RESULTS_PER_PAGE);
+		Query query = currentSession.createQuery("from CodeSnippet where username = :username order by updateTime desc");
 		List<CodeSnippet> codeSnippets = query.setParameter("username", username).getResultList();
 		return codeSnippets;
 	}

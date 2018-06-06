@@ -7,6 +7,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,15 +31,25 @@ public class AppController {
 	}
 	
 	@GetMapping("/main")
-	public String showMainPage(@RequestParam(value = "page", required = false) int page,
+	public String showMainPage(@RequestParam(value = "page", required = false) Integer page,
 				Model theModel, Principal thePrincipal) {
-		int startPage = (page - 2 > 0)?(page - 2):1;
-	    int endPage = startPage + 4;
-	    theModel.addAttribute("startpage", startPage);
-	    theModel.addAttribute("endpage", endPage);
         String theUserName = thePrincipal.getName();
-		List<CodeSnippet> codeSnippets = codeSnippetService.getCodeSnippets(theUserName, page);
-		theModel.addAttribute("codeSnippets", codeSnippets);
+		List<CodeSnippet> snippets = codeSnippetService.getCodeSnippets(theUserName);
+		PagedListHolder<CodeSnippet> codeSnippets = new PagedListHolder<>(snippets);
+		codeSnippets.setPageSize(4);
+		theModel.addAttribute("maxPages", codeSnippets.getPageCount());
+		if(page == null || page < 1 || page > codeSnippets.getPageCount()){
+			page=1;
+		}
+		theModel.addAttribute("page", page);
+	    if(page == null || page < 1 || page > codeSnippets.getPageCount()){
+	    	codeSnippets.setPage(0);
+	        theModel.addAttribute("codeSnippets", codeSnippets.getPageList());
+	    }
+	    else if(page <= codeSnippets.getPageCount()) {
+	    	codeSnippets.setPage(page-1);
+	        theModel.addAttribute("codeSnippets", codeSnippets.getPageList());
+	    }
 		return "main";
 	}
 	
@@ -54,68 +65,49 @@ public class AppController {
 	
 	@GetMapping("/add-new-snippet")
 	public String showAddNewSnippet(Model theModel){
-		
-		// create model attribute to bind form data
 		CodeSnippet theCodeSnippet = new CodeSnippet();
-		
 		theModel.addAttribute("newCodeSnippet", theCodeSnippet);
-		
 		return "add-new-snippet";
 	}
 	
 	@PostMapping("/saveCodeSnippet")
 	public String saveCodeSnippet(@Valid @ModelAttribute("newCodeSnippet") CodeSnippet theCodeSnippet,
-			BindingResult theBindingResult,
-			Principal thePrincipal) {
-		
+			BindingResult theBindingResult, Principal thePrincipal) {
 		if(theBindingResult.hasErrors()) {
 			return "add-new-snippet";
 		}
-		
         String theUserName = thePrincipal.getName();
-		
         theCodeSnippet.setUsername(theUserName);
-        
-		// save the code snippet using our service
 		codeSnippetService.saveCodeSnippet(theCodeSnippet);	
-		
-		return "redirect:/main";
+		return "redirect:/snippet-added-confirmation";
 	}
 	
 	@GetMapping("/show-details")
 	public String showMore(@RequestParam("snippetId") int theId,
-									Model theModel) {
-		
-		// get the code snippet from our service using id
+			Model theModel) {
 		CodeSnippet theCodeSnippet = codeSnippetService.getCodeSnippet(theId);
-		
-		// set code snippet as a model attribute to show details
 		theModel.addAttribute("codeSnippet", theCodeSnippet);
-			
 		return "snippet-details";
 	}
 
 	@GetMapping("/show-edit-form")
 	public String showEditForm(@RequestParam("snippetId") int theId,
 			Model theModel) {
-		
-		// get the code snippet from our service using id
 		CodeSnippet theCodeSnippet = codeSnippetService.getCodeSnippet(theId);
-				
-		// set code snippet as a model attribute to show details
 		theModel.addAttribute("newCodeSnippet", theCodeSnippet);
-		
 		return "edit-snippet";
 	}
 	
 	@GetMapping("/delete")
 	public String deleteCustomer(@RequestParam("snippetId") int theId,
 			Model theModel) {
-		
-		// delete the customer
 		codeSnippetService.deleteCustomer(theId);
-		
 		return "redirect:/main";
+	}
+	
+	@GetMapping("/snippet-added-confirmation")
+	public String showSnippetAddedConfirmation() {
+		return "snippet-added-confirmation";
 	}
 	
 }

@@ -17,8 +17,8 @@ public class CodeSnippetServiceImpl implements CodeSnippetService {
 	
 	@Transactional
 	@Override
-	public List<CodeSnippet> getCodeSnippets(String username, int page) {
-		return codeSnippetDAO.getCodeSnippets(username, page);
+	public List<CodeSnippet> getCodeSnippets(String username) {
+		return codeSnippetDAO.getCodeSnippets(username);
 	}
 	
 	@Transactional

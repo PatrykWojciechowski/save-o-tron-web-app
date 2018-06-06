@@ -70,33 +70,30 @@
             </div>
           </div>
           </c:forEach>
-      </div>
-      <!-- /.row -->
-      <c:set var = "previousPage" scope = "session" value = "${param.page-1}"/>
-      <c:set var = "nextPage" scope = "session" value = "${param.page+1}"/>
-	  <ul class="pagination mx-auto">
-		<c:if test="${param.page > 1}">
-	       	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/main/?page=1">First</a></li>
-	    </c:if>
-	    <c:if test="${param.page != 1}">
-	    	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/main/?page=${previousPage}">Previous</a></li>
-	    </c:if>
-		  <c:forEach begin="${startpage}" end="${endpage}" var="p">
-		  	<c:if test="${p<=6}">
-		  			<li class="page-item 
-		  				<c:if test="${p==param.page}">
-		  						active
-		  				</c:if>
-		  			"><a class="page-link" href="${pageContext.request.contextPath}/main/?page=${p}">${p}</a></li>
-		  	</c:if>
-	         </c:forEach>
-	   <c:if test = "${param.page<6}">
-	   		<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/main/?page=${nextPage}">Next</a></li>
-	   </c:if>      
-	    </ul>
+      <nav aria-label="Page navigation">
+		  <ul class="pagination justify-content-center">
+		    <c:if test="${page != 1}">
+		    	<c:set var = "previousPage" scope = "session" value = "${page-1}"/>
+		    	<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/main/?page=${previousPage}">Previous</a></li>
+		    </c:if>
+			  <c:forEach begin="1" end="${maxPages}" step="1" varStatus="p">
+			  	<c:if test="${p.index<=maxPages}">
+			  			<li class="page-item 
+			  				<c:if test="${p.index==page}">
+			  						active
+			  				</c:if>
+			  			"><a class="page-link" href="${pageContext.request.contextPath}/main/?page=${p.index}">${p.index}</a></li>
+			  	</c:if>
+		         </c:forEach>
+		   	<c:if test = "${page<maxPages}">
+		   		<c:set var = "nextPage" scope = "session" value = "${page+1}"/>
+		   		<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/main/?page=${nextPage}">Next</a></li>
+		   	</c:if>      
+		   </ul>
+	   </nav>
 	</div>
-	<!-- /. main container -->
-	</div>
+	</div> <!-- /.row -->
+	</div><!-- /. main container -->
 	<footer class="footer">
 		<div class="container">
 			<p class="footp">2018 © Patryk Wojciechowski</p>
