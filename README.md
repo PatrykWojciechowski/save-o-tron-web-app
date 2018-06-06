@@ -13,8 +13,11 @@ The application was developed from scratch in Spring framework (full Java config
 This application is available for the tests now!(hosted on AWS Elastic Beanstalk and Amazon RDS)
 To test the app, click on the link below!
 [Save-o-tron online](http://default-environment.pzfmzh5smt.us-east-2.elasticbeanstalk.com/)
+For the tests you can log in as:
+- username->admin
+- password->admin 
+or you can create new account :)
 
-	
 ### Author
 
 - [Patryk Wojciechowski](https://github.com/PatrykWojciechowski)
