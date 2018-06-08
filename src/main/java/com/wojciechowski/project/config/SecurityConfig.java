@@ -17,7 +17,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	//a reference to our security data source
 	@Autowired
 	private DataSource securityDataSource;
 	
@@ -39,22 +38,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-		.antMatchers("/").permitAll()
-		.antMatchers("/main/**").hasRole("USER")
-		.antMatchers("/add-new-snippet").hasRole("USER")
-		.antMatchers("/saveCodeSnippet").hasRole("USER")
-		.antMatchers("/show-details").hasRole("USER")
-		.antMatchers("/show-edit-form").hasRole("USER")
-		.antMatchers("/snippet-added-confirmation").hasRole("USER")
-		.antMatchers("/delete").hasRole("USER")
+	protected void configure(HttpSecurity httpSecurity) throws Exception {
+		httpSecurity.authorizeRequests()
+		.antMatchers("/")
+		.permitAll()
+		.antMatchers("/main","/add-new-snippet","/saveCodeSnippet",
+					"/show-details","/show-edit-form",
+					"/snippet-added-confirmation","/delete")
+		.hasRole("USER")
 		.and()
-		.formLogin().loginPage("/loginPage")
+		.formLogin()
+		.loginPage("/loginPage")
 		.loginProcessingUrl("/authenticateTheUser")
 		.permitAll()
 		.and()
-		.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
+		.logout()
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+		.permitAll()
 		.and()
 		.exceptionHandling().accessDeniedPage("/access-denied");
 	}
