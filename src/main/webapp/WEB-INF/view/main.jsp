@@ -70,7 +70,8 @@
             </div>
           </div>
           </c:forEach>
-      <nav aria-label="Page navigation">
+      <c:if test="${page != maxPages}">
+      <nav aria-label="Page navigation" >
 		  <ul class="pagination justify-content-center">
 		    <c:if test="${page != 1}">
 		    	<c:set var = "previousPage" scope = "session" value = "${page-1}"/>
@@ -91,6 +92,7 @@
 		   	</c:if>      
 		   </ul>
 	   </nav>
+	   </c:if>
 	</div>
 	</div> <!-- /.row -->
 	</div><!-- /. main container -->

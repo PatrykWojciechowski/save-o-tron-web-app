@@ -34,6 +34,15 @@ CREATE TABLE IF NOT EXISTS `saveotron_db`.`users` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES ('admin','{bcrypt}$2a$04$N1BOL0thsQCZXJUZzkQD5OSU84XVGL2TAo3QNSWzpT1yarY5gxLHi',1);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
 
 -- -----------------------------------------------------
 -- Table `saveotron_db`.`authorities`
@@ -50,6 +59,15 @@ CREATE TABLE IF NOT EXISTS `saveotron_db`.`authorities` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
+--
+-- Dumping data for table `authorities`
+--
+
+LOCK TABLES `authorities` WRITE;
+/*!40000 ALTER TABLE `authorities` DISABLE KEYS */;
+INSERT INTO `authorities` VALUES ('admin','ROLE_ADMIN'),('admin','ROLE_USER');
+/*!40000 ALTER TABLE `authorities` ENABLE KEYS */;
+UNLOCK TABLES;
 
 -- -----------------------------------------------------
 -- Table `saveotron_db`.`code_snippets`
@@ -75,6 +93,15 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 14
 DEFAULT CHARACTER SET = latin1;
 
+--
+-- Dumping data for table `code_snippets`
+--
+
+LOCK TABLES `code_snippets` WRITE;
+/*!40000 ALTER TABLE `code_snippets` DISABLE KEYS */;
+INSERT INTO `code_snippets` VALUES (14,'Odd or even?','int start = -3;\r\nint end = 6;\r\n\r\nfor (int val = start; val < end; val++)\r\n{\r\n    // Condition to Check Even, Not condition (!) will give Odd number\r\n    if (val % 2 == 0) \r\n    {\r\n        System.out.println(\"Even\" + val);\r\n    }\r\n    else\r\n    {\r\n        System.out.println(\"Odd\" + val);\r\n    }\r\n','2018-05-31 11:30:31','2018-05-31 11:30:31','admin',''),(15,'String to date','SimpleDateFormat format = new SimpleDateFormat( \"dd.MM.yyyy\" );\r\nDate date = format.parse( myString );','2018-05-31 11:33:57','2018-05-31 11:33:57','admin','Converting String to date in Java'),(16,'Java Date to SQL Date','java.util.Date utilDate = new java.util.Date();\r\njava.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());','2018-05-31 11:37:01','2018-05-31 11:37:01','admin','Converting Java util.Date to sql.Date'),(18,'int to String and String to int','String a = String.valueOf(2);   //integer to numeric string\r\nint i = Integer.parseInt(a); //numeric string to an int','2018-05-31 11:39:55','2018-05-31 11:39:55','admin','Conver int to String and String to int'),(19,'JDBC -> Oracle','public class OracleJdbcTest\r\n{\r\n    String driverClass = \"oracle.jdbc.driver.OracleDriver\";\r\n \r\n    Connection con;\r\n     \r\n    public void init(FileInputStream fs) throws ClassNotFoundException, SQLException, FileNotFoundException, IOException\r\n    {\r\n        Properties props = new Properties();\r\n        props.load(fs);\r\n        String url = props.getProperty(\"db.url\");\r\n        String userName = props.getProperty(\"db.user\");\r\n        String password = props.getProperty(\"db.password\");\r\n        Class.forName(driverClass);\r\n \r\n        con=DriverManager.getConnection(url, userName, password);\r\n    }\r\n     \r\n    public void fetch() throws SQLException, IOException\r\n    {\r\n        PreparedStatement ps = con.prepareStatement(\"select SYSDATE from dual\");\r\n        ResultSet rs = ps.executeQuery();\r\n         \r\n        while (rs.next())\r\n        {\r\n            // do the thing you do\r\n        }\r\n        rs.close();\r\n        ps.close();\r\n    }\r\n \r\n    public static void main(String[] args) \r\n    {\r\n        OracleJdbcTest test = new OracleJdbcTest();\r\n        test.init();\r\n        test.fetch();\r\n    }\r\n}','2018-05-31 11:44:34','2018-05-31 11:44:34','admin','Using Java JDBC to connect to Oracle'),(21,'Numbers from x to 0','public void showNumbersFromToX(int x) {\r\n  		if(x<0) {\r\n  			System.out.println(\"Sorry, number which u inserted is zero or below zero.\");\r\n  			return;\r\n  		}\r\n  		while(x>=0) {\r\n  			System.out.println(x);\r\n  			x--;\r\n  		} \r\n}',NULL,'2018-05-31 14:32:03','admin','Print numbers'),(28,'Using Java to send an email','import javax.mail.*;\r\nimport javax.mail.internet.*;\r\nimport java.util.*;\r\n \r\npublic void postMail( String recipients[ ], String subject, String message , String from) throws MessagingException\r\n{\r\n    boolean debug = false;\r\n \r\n     //Set the host smtp address\r\n     Properties props = new Properties();\r\n     props.put(\"mail.smtp.host\", \"smtp.example.com\");\r\n \r\n    // create some properties and get the default Session\r\n    Session session = Session.getDefaultInstance(props, null);\r\n    session.setDebug(debug);\r\n \r\n    // create a message\r\n    Message msg = new MimeMessage(session);\r\n \r\n    // set the from and to address\r\n    InternetAddress addressFrom = new InternetAddress(from);\r\n    msg.setFrom(addressFrom);\r\n \r\n    InternetAddress[] addressTo = new InternetAddress[recipients.length]; \r\n    for (int i = 0; i < recipients.length; i++)\r\n    {\r\n        addressTo[i] = new InternetAddress(recipients[i]);\r\n    }\r\n    msg.setRecipients(Message.RecipientType.TO, addressTo);\r\n    \r\n \r\n    // Optional : You can also set your custom headers in the Email if you Want\r\n    msg.addHeader(\"MyHeaderName\", \"myHeaderValue\");\r\n \r\n    // Setting the Subject and Content Type\r\n    msg.setSubject(subject);\r\n    msg.setContent(message, \"text/plain\");\r\n    Transport.send(msg);\r\n}','2018-06-06 11:25:57','2018-06-06 11:25:57','admin',''),(29,'PDF Generation in Java','import java.io.File;\r\nimport java.io.FileOutputStream;\r\nimport java.io.OutputStream;\r\nimport java.util.Date;\r\n\r\nimport com.lowagie.text.Document;\r\nimport com.lowagie.text.Paragraph;\r\nimport com.lowagie.text.pdf.PdfWriter;\r\n\r\npublic class GeneratePDF {\r\n\r\n    public static void main(String[] args) {\r\n        try {\r\n            OutputStream file = new FileOutputStream(new File(\"C:\\\\Test.pdf\"));\r\n\r\n            Document document = new Document();\r\n            PdfWriter.getInstance(document, file);\r\n            document.open();\r\n            document.add(new Paragraph(\"Hello Kiran\"));\r\n            document.add(new Paragraph(new Date().toString()));\r\n\r\n            document.close();\r\n            file.close();\r\n\r\n        } catch (Exception e) {\r\n\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n}','2018-06-06 11:27:57','2018-06-06 11:27:57','admin','PDF Generation in Java using iText JAR'),(30,'Screen shoots','import java.awt.Dimension;\r\nimport java.awt.Rectangle;\r\nimport java.awt.Robot;\r\nimport java.awt.Toolkit;\r\nimport java.awt.image.BufferedImage;\r\nimport javax.imageio.ImageIO;\r\nimport java.io.File;\r\n\r\n...\r\n\r\npublic void captureScreen(String fileName) throws Exception {\r\n\r\n   Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();\r\n   Rectangle screenRectangle = new Rectangle(screenSize);\r\n   Robot robot = new Robot();\r\n   BufferedImage image = robot.createScreenCapture(screenRectangle);\r\n   ImageIO.write(image, \"png\", new File(fileName));\r\n\r\n}\r\n...','2018-06-06 11:33:53','2018-06-06 11:33:53','admin','Capture screen shots in Java'),(31,'Array -> Map in Java','import java.util.Map;\r\nimport org.apache.commons.lang.ArrayUtils;\r\n \r\npublic class Main {\r\n \r\n  public static void main(String[] args) {\r\n    String[][] countries = { { \"United States\", \"New York\" }, { \"United Kingdom\", \"London\" },\r\n        { \"Netherland\", \"Amsterdam\" }, { \"Japan\", \"Tokyo\" }, { \"France\", \"Paris\" } };\r\n \r\n    Map countryCapitals = ArrayUtils.toMap(countries);\r\n \r\n    System.out.println(\"Capital of Japan is \" + countryCapitals.get(\"Japan\"));\r\n    System.out.println(\"Capital of France is \" + countryCapitals.get(\"France\"));\r\n  }\r\n}',NULL,'2018-06-06 11:47:02','admin','Convert Array to Map in Java');
+/*!40000 ALTER TABLE `code_snippets` ENABLE KEYS */;
+UNLOCK TABLES;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
