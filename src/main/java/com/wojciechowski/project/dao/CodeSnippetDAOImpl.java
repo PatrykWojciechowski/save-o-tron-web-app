@@ -14,8 +14,12 @@ import com.wojciechowski.project.entity.CodeSnippet;
 @Repository
 public class CodeSnippetDAOImpl implements CodeSnippetDAO {
 
-	@Autowired
 	private SessionFactory sessionFactory;
+	
+	@Autowired
+	public CodeSnippetDAOImpl(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 	
 	@Override
 	public List<CodeSnippet> getCodeSnippets(String username) {
@@ -34,7 +38,6 @@ public class CodeSnippetDAOImpl implements CodeSnippetDAO {
 	@Override
 	public CodeSnippet getCodeSnippet(int theId) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		// retrieve/read from database using the primary key
 		CodeSnippet theCodeSnippet = currentSession.get(CodeSnippet.class, theId);
 		return theCodeSnippet;
 	}

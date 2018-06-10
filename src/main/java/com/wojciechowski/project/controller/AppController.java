@@ -22,8 +22,12 @@ import com.wojciechowski.project.service.CodeSnippetService;
 @Controller
 public class AppController {
 
-	@Autowired
 	private CodeSnippetService codeSnippetService;
+	
+	@Autowired
+	public AppController(CodeSnippetService codeSnippetService) {
+		this.codeSnippetService = codeSnippetService;
+	}
 	
 	@GetMapping("/")
 	public String showHome() {

@@ -28,16 +28,12 @@ import com.wojciechowski.project.user.NormalUser;
 @RequestMapping("/register")
 public class RegistrationController {
 
-	@Autowired
 	private UserDetailsManager userDetailsManager;
-	
 	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
-	//	used in the form validation process. Here we add support to trim empty strings to null.
-	@InitBinder
-	public void initBinder(WebDataBinder dataBinder) {
-		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
-		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
+	@Autowired
+	public RegistrationController(UserDetailsManager userDetailsManager) {
+		this.userDetailsManager = userDetailsManager;
 	}
 	
 	@GetMapping("/showRegistrationForm")
@@ -84,6 +80,12 @@ public class RegistrationController {
 		return "registration-confirmation";
 	}
 	
+	//	Used in the form validation process. Here we add support to trim empty strings to null.
+	@InitBinder
+	public void initBinder(WebDataBinder dataBinder) {
+		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
+	}
 	
 	//	This helper method makes use of the userDetailsManager bean that was @Autowired
 	//	earlier in this RegistrationController.
@@ -93,5 +95,5 @@ public class RegistrationController {
 		boolean exists = userDetailsManager.userExists(userName);
 		return exists;
 	}
-	
+
 }

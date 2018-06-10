@@ -12,9 +12,13 @@ import com.wojciechowski.project.entity.CodeSnippet;
 @Service
 public class CodeSnippetServiceImpl implements CodeSnippetService {
 
-	@Autowired
 	private CodeSnippetDAO codeSnippetDAO;
 	
+	@Autowired
+	public CodeSnippetServiceImpl(CodeSnippetDAO codeSnippetDAO) {
+		this.codeSnippetDAO = codeSnippetDAO;
+	}
+
 	@Transactional
 	@Override
 	public List<CodeSnippet> getCodeSnippets(String username) {

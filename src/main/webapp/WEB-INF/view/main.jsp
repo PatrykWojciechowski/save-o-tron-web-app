@@ -70,7 +70,7 @@
             </div>
           </div>
           </c:forEach>
-      <c:if test="${page != maxPages}">
+      <c:if test="${maxPages != 1}">
       <nav aria-label="Page navigation" >
 		  <ul class="pagination justify-content-center">
 		    <c:if test="${page != 1}">
