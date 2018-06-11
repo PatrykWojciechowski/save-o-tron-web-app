@@ -14,9 +14,9 @@ This application is available for the tests now!(hosted on AWS Elastic Beanstalk
 To test the app, click on the link below!  
 [Save-o-tron online](http://default-environment.pzfmzh5smt.us-east-2.elasticbeanstalk.com/)  
 For the tests you can log in as:
-- username->admin
-- password->admin  
-or you can create new account :)
+- username -> admin
+- password -> admin  
+or you can create a new account :)
 
 ### Author
 
