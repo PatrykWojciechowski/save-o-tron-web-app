@@ -37,7 +37,7 @@ public class AppController {
 	@GetMapping("/main")
 	public String showMainPage(@RequestParam(value = "page", required = false) Integer page,
 				Model theModel, Principal thePrincipal) {
-        String theUserName = thePrincipal.getName();
+		String theUserName = thePrincipal.getName();
 		List<CodeSnippet> snippets = codeSnippetService.getCodeSnippets(theUserName);
 		PagedListHolder<CodeSnippet> codeSnippets = new PagedListHolder<>(snippets);
 		codeSnippets.setPageSize(4);
