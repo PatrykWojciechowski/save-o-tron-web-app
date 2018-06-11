@@ -19,12 +19,19 @@ For the tests you can log in as:
 or you can create a new account :)
 
 ### Screenshots
+- Homepage  
 ![homepage](https://user-images.githubusercontent.com/32172774/41258424-606a9734-6dd0-11e8-8294-a80636d4f80d.jpg)  
+- Login page  
 ![loginpage](https://user-images.githubusercontent.com/32172774/41258464-7e232926-6dd0-11e8-9c46-08e72e5b50c1.jpg)  
+- Code repository  
 ![coderepository](https://user-images.githubusercontent.com/32172774/41258477-8e74da86-6dd0-11e8-9f03-1b739822fa88.jpg)  
+- Adding a new code snippet
 ![add](https://user-images.githubusercontent.com/32172774/41258502-a804905e-6dd0-11e8-91b7-34cb309a95a7.jpg)  
-![details](https://user-images.githubusercontent.com/32172774/41258504-a99f8de2-6dd0-11e8-8f10-1b08892b55d3.jpg)  
+- Checking snippet details
+![details](https://user-images.githubusercontent.com/32172774/41258504-a99f8de2-6dd0-11e8-8f10-1b08892b55d3.jpg)
+- Updating an existing snippet
 ![update](https://user-images.githubusercontent.com/32172774/41258506-aaa481a2-6dd0-11e8-9871-e3ad73d2ce80.jpg)  
+- Deleting an existing snippet
 ![delete](https://user-images.githubusercontent.com/32172774/41258507-ab636d92-6dd0-11e8-8009-3249ebf3ae7f.jpg)  
 
 ### Author
