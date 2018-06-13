@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -44,16 +46,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.authorizeRequests()
-		.antMatchers("/","/moreInfo","/aboutMe")
+		.antMatchers("/","/more-info","/about-me")
 		.permitAll()
-		.antMatchers("/main","/add-new-snippet","/saveCodeSnippet",
+		.antMatchers("/main","/add-new-snippet","/save-code-snippet",
 					"/show-details","/show-edit-form",
-					"/snippet-added-confirmation","/delete")
+					"/snippet-added-confirmation","/delete",
+					"/snippet-deleted-confirmation")
 		.hasRole("USER")
 		.and()
 		.formLogin()
-		.loginPage("/loginPage")
-		.loginProcessingUrl("/authenticateTheUser")
+		.loginPage("/login-page")
+		.loginProcessingUrl("/authenticate-the-user")
 		.permitAll()
 		.and()
 		.logout()

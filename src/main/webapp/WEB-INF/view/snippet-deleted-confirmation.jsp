@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Edit code snippet</title>
+  <title>Snippet added successfully!</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Bootstrap 4 css -->
@@ -39,46 +39,20 @@
 		  </div>
 		</div>  
 	</nav>
- 	<!-- Page Content -->
-	<div class="container addform" >
+    <!-- Page Content -->
+    <div class="container content">
       <div class="row">
         <div class="col-lg-10 content">
-          <h1 class="my-4">Edit snippet</h1>
-          <!-- Card -->
-          <div class="card mb-4">
-            <div class="card-body">
-              <div class="alert alert-info">
-			  		Here you can alter your code snippet.
-			  </div>           
-              <!--  form -->
-				 <form:form action="save-code-snippet" modelAttribute="newCodeSnippet" method="POST">
-				 <form:hidden path="id" />
-				  <div class="form-group">
-				    <label for="title" style="font-weight: bold">Title:</label>
-				    <form:input type="text" class="form-control" id="title" path="title"/>
-				    <form:errors path="title" class="alert alert-danger my-2" element="div"/>
-				  </div>
-				  <div class="form-group">
-				    <label for="snippet" style="font-weight: bold">Your code snippet:</label>
-				    <form:textarea class="form-control" rows="10" id="snippet" path="textField"/>
-				    <form:errors path="textField" class="alert alert-danger my-2" element="div" />
-				  </div>
-				  <div class="form-group">
-				   	<label for="desc" style="font-weight: bold">Description:</label>
-				    <form:input type="text" class="form-control" id="desc" path="description"/>
-				    <form:errors path="description" class="alert alert-danger my-2" element="div" />
-				  </div>
-				  <input type="submit" class="btn btn-success px-5" value="Submit"/>
-				</form:form>
-              <!--  form end -->
-            </div>
-          </div>
-          <a href="${pageContext.request.contextPath}/main" class="btn btn-dark mb-3 px-5">Go back &rarr;</a>
-		</div>
+			<br/>
+		      <div class="alert alert-success">
+			  		Your code has been deleted!
+			  </div>   
+          <a href="${pageContext.request.contextPath}/main" class="btn btn-dark px-5">Go back &rarr;</a>
+		 </div>
       </div>
       <!-- /.row -->
 	</div>
-	<!-- /. main container -->
+	<!--  /. main container -->
 	<footer class="footer">
 		<div class="container">
 			<p class="footp">2018 © Patryk Wojciechowski</p>

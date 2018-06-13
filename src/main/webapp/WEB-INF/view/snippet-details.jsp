@@ -84,7 +84,7 @@
       <!-- /.row -->
 	</div>
 	<!-- /.  main container -->
-	<!-- The Modal (Popup box for delete-->
+	<!-- The Modal (Popup box for delete)-->
 	  <div class="modal fade" id="myModal">
 	    <div class="modal-dialog modal-dialog-centered">
 	      <div class="modal-content">

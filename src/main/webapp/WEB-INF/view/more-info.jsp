@@ -23,13 +23,13 @@
               <nav class="nav nav-masthead">
                 <security:authorize access="isAnonymous()">
                 <a class="nav-link active" href="${pageContext.request.contextPath}/main">Login</a>
-                <a class="nav-link" href="${pageContext.request.contextPath}/register/showRegistrationForm">Register</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/register/show-registration-form">Register</a>
                </security:authorize>
-                <security:authorize access="hasRole('USER')">
-               <a class="nav-link" href="${pageContext.request.contextPath}/logout">Logout</a>
-               <a class="nav-link" href="${pageContext.request.contextPath}/main">Repository</a>
+               <security:authorize access="hasRole('USER')">
+               	<a class="nav-link active" href="${pageContext.request.contextPath}/main">Code Repository</a>
+               	<a class="nav-link" href="${pageContext.request.contextPath}/logout">Logout</a>
                </security:authorize>
-                <a class="nav-link" href="${pageContext.request.contextPath}/aboutMe">About</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/about-me">About</a>
               </nav>
             </div>
           </div>

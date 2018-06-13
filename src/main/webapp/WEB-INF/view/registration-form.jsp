@@ -22,7 +22,7 @@
 				</div>
 				<div style="padding-top: 30px" class="panel-body">
 					<!-- Registration Form -->
-					<form:form action="${pageContext.request.contextPath}/register/processRegistrationForm" 
+					<form:form action="${pageContext.request.contextPath}/register/process-registration-form" 
 						  	   modelAttribute="newUser"
 						  	   class="form-horizontal">
 						<!-- User name -->
@@ -54,7 +54,7 @@
 				</div>
 			</div>
 		<p>
-			<a href="${pageContext.request.contextPath}/loginPage" 
+			<a href="${pageContext.request.contextPath}/login-page" 
 			class="btn btn-default" role="button">Back to Login Page</a>
 		</p>
 		<br/>

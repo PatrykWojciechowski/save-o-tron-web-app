@@ -22,7 +22,7 @@
 				</div>
 				<div style="padding-top: 30px" class="panel-body">
 					<!-- Login Form -->
-					<form:form action="${pageContext.request.contextPath}/authenticateTheUser" 
+					<form:form action="${pageContext.request.contextPath}/authenticate-the-user" 
 						  method="POST" class="form-horizontal">
 					    <!-- Place for messages: error, alert etc ... -->
 					    <div class="form-group">
@@ -51,7 +51,7 @@
 						<!-- Password -->
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span> 
-							<input type="password" name="password" placeholder="password" class="form-control" >
+							<input type="password" name="password" placeholder="password" class="form-control">
 						</div>
 						<!-- Login/Submit Button -->
 						<div style="margin-top: 10px" class="form-group">						
@@ -63,7 +63,7 @@
 				</div>
 			</div>
 			<p>
-				<a href="${pageContext.request.contextPath}/register/showRegistrationForm" 
+				<a href="${pageContext.request.contextPath}/register/show-registration-form" 
 				class="btn btn-default" role="button" aria-pressed="true">Register New User</a>
 			</p>
 			<br/>

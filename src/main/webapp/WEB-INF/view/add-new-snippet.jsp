@@ -52,7 +52,7 @@
 			  		Fill in the blanks below and submit to save your own code snippet
 			  </div>           
               <!--  form -->
-			  <form:form action="saveCodeSnippet" modelAttribute="newCodeSnippet" method="POST">
+			  <form:form action="save-code-snippet" modelAttribute="newCodeSnippet" method="POST">
 					  <div class="form-group">
 					    <label for="title" style="font-weight: bold">Title:</label>
 					    <form:input type="text" class="form-control" id="title" path="title"/>
@@ -73,7 +73,7 @@
               <!--  form end -->
             </div>
           </div>
-          <a href="${pageContext.request.contextPath}/main" class="btn btn-dark px-5">Go back &rarr;</a>
+          <a href="${pageContext.request.contextPath}/main" class="btn btn-dark px-5 mb-3">Go back &rarr;</a>
 		</div>
       </div>
       <!-- /.row -->

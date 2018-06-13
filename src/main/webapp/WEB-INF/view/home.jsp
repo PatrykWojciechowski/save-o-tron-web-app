@@ -23,13 +23,13 @@
               <nav class="nav nav-masthead">
               <security:authorize access="isAnonymous()">
                 <a class="nav-link active" href="${pageContext.request.contextPath}/main">Login</a>
-                <a class="nav-link" href="${pageContext.request.contextPath}/register/showRegistrationForm">Register</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/register/show-registration-form">Register</a>
                </security:authorize>
                <security:authorize access="hasRole('USER')">
-               <a class="nav-link" href="${pageContext.request.contextPath}/logout">Logout</a>
-               <a class="nav-link" href="${pageContext.request.contextPath}/main">Code Repository</a>
+               	<a class="nav-link active" href="${pageContext.request.contextPath}/main">Code Repository</a>
+               	<a class="nav-link" href="${pageContext.request.contextPath}/logout">Logout</a>
                </security:authorize>
-                <a class="nav-link" href="${pageContext.request.contextPath}/aboutMe">About</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/about-me">About</a>
               </nav>
             </div>
           </div>
@@ -39,7 +39,7 @@
             	 it at any time and at any place with the use of any device (desktop or mobile)</b></p>             				
             <p class="lead"><b>To get more information about this application, please click on the button below.</b></p>			
             <p class="lead">
-              <a href="${pageContext.request.contextPath}/moreInfo" class="btn btn-md btn-secondary"><b>More info</b></a>
+              <a href="${pageContext.request.contextPath}/more-info" class="btn btn-md btn-secondary"><b>More info</b></a>
             </p>
           </div>
           <div class="mastfoot">

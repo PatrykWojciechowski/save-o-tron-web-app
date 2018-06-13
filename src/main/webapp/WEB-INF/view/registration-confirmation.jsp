@@ -27,7 +27,7 @@
 				</div>
 			</div>
 			<p>
-				<a href="${pageContext.request.contextPath}/loginPage" 
+				<a href="${pageContext.request.contextPath}/login-page" 
 				class="btn btn-default" role="button" aria-pressed="true">Login with username and password</a>
 			</p>
 			<p>

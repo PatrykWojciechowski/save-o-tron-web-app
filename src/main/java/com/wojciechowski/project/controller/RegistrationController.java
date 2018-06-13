@@ -35,14 +35,14 @@ public class RegistrationController {
 	public RegistrationController(UserDetailsManager userDetailsManager) {
 		this.userDetailsManager = userDetailsManager;
 	}
-	
-	@GetMapping("/showRegistrationForm")
+
+	@GetMapping("/show-registration-form")
 	public String showRegistrationForm(Model theModel) {
 		theModel.addAttribute("newUser", new NormalUser());
 		return "registration-form";
 	}
 
-	@PostMapping("/processRegistrationForm")
+	@PostMapping("/process-registration-form")
 	public String processRegistrationForm(
 			@Valid @ModelAttribute("newUser") NormalUser theNewUser,
 			BindingResult theBindingResult,

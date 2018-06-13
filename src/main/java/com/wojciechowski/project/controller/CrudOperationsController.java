@@ -20,23 +20,19 @@ import com.wojciechowski.project.entity.CodeSnippet;
 import com.wojciechowski.project.service.CodeSnippetService;
 
 @Controller
-public class AppController {
+public class CrudOperationsController {
 
 	private CodeSnippetService codeSnippetService;
 	
 	@Autowired
-	public AppController(CodeSnippetService codeSnippetService) {
+	public CrudOperationsController(CodeSnippetService codeSnippetService) {
 		this.codeSnippetService = codeSnippetService;
-	}
-	
-	@GetMapping("/")
-	public String showHome() {
-		return "home";
 	}
 	
 	@GetMapping("/main")
 	public String showMainPage(@RequestParam(value = "page", required = false) Integer page,
 				Model theModel, Principal thePrincipal) {
+		
 		String theUserName = thePrincipal.getName();
 		List<CodeSnippet> snippets = codeSnippetService.getCodeSnippets(theUserName);
 		PagedListHolder<CodeSnippet> codeSnippets = new PagedListHolder<>(snippets);
@@ -57,26 +53,18 @@ public class AppController {
 		return "main";
 	}
 	
-	@GetMapping("/moreInfo")
-	public String showMoreInfoPage() {
-		return "more-info";
-	}
-	
-	@GetMapping("/aboutMe")
-	public String showAboutMePage() {
-		return "about-me";
-	}
-	
 	@GetMapping("/add-new-snippet")
 	public String showAddNewSnippet(Model theModel){
+		
 		CodeSnippet theCodeSnippet = new CodeSnippet();
 		theModel.addAttribute("newCodeSnippet", theCodeSnippet);
 		return "add-new-snippet";
 	}
 	
-	@PostMapping("/saveCodeSnippet")
+	@PostMapping("/save-code-snippet")
 	public String saveCodeSnippet(@Valid @ModelAttribute("newCodeSnippet") CodeSnippet theCodeSnippet,
 			BindingResult theBindingResult, Principal thePrincipal) {
+		
 		if(theBindingResult.hasErrors()) {
 			return "add-new-snippet";
 		}
@@ -89,6 +77,7 @@ public class AppController {
 	@GetMapping("/show-details")
 	public String showMore(@RequestParam("snippetId") int theId,
 			Model theModel) {
+		
 		CodeSnippet theCodeSnippet = codeSnippetService.getCodeSnippet(theId);
 		theModel.addAttribute("codeSnippet", theCodeSnippet);
 		return "snippet-details";
@@ -97,6 +86,7 @@ public class AppController {
 	@GetMapping("/show-edit-form")
 	public String showEditForm(@RequestParam("snippetId") int theId,
 			Model theModel) {
+		
 		CodeSnippet theCodeSnippet = codeSnippetService.getCodeSnippet(theId);
 		theModel.addAttribute("newCodeSnippet", theCodeSnippet);
 		return "edit-snippet";
@@ -105,13 +95,19 @@ public class AppController {
 	@GetMapping("/delete")
 	public String deleteCustomer(@RequestParam("snippetId") int theId,
 			Model theModel) {
+		
 		codeSnippetService.deleteCustomer(theId);
-		return "redirect:/main";
+		return "redirect:/snippet-deleted-confirmation";
 	}
 	
 	@GetMapping("/snippet-added-confirmation")
 	public String showSnippetAddedConfirmation() {
 		return "snippet-added-confirmation";
+	}
+	
+	@GetMapping("/snippet-deleted-confirmation")
+	public String showSnippetDeletedConfirmation() {
+		return "snippet-deleted-confirmation";
 	}
 	
 }
