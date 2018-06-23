@@ -26,7 +26,6 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 
 @Configuration
-@EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan(basePackages="com.wojciechowski.project")
 @PropertySource({"classpath:persistence-mysql.properties",
@@ -39,14 +38,6 @@ public class AppConfig implements WebMvcConfigurer{
 	@Autowired
 	public AppConfig(Environment env) {
 		this.env = env;
-	}
-	
-	@Bean
-	public ViewResolver viewResolver() {
-		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-		viewResolver.setPrefix("/WEB-INF/view/");
-		viewResolver.setSuffix(".jsp");
-		return viewResolver;	
 	}
 	
 	@Bean
@@ -120,12 +111,6 @@ public class AppConfig implements WebMvcConfigurer{
 		HibernateTransactionManager txManager = new HibernateTransactionManager();
 		txManager.setSessionFactory(sessionFactory);
 		return txManager;
-	}
-	
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**")
-				.addResourceLocations("/resources/");
 	}
 
 	//helper method

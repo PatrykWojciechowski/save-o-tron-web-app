@@ -6,69 +6,63 @@
 	<version>1.0</version>
 	<packaging>war</packaging>
 	<properties>
-		<springframework.version>5.0.2.RELEASE</springframework.version>
-		<springsecurity.version>5.0.0.RELEASE</springsecurity.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
+	<parent>
+    	<groupId>org.springframework.boot</groupId>
+    	<artifactId>spring-boot-starter-parent</artifactId>
+    	<version>2.0.3.RELEASE</version>
+	</parent>
 	<dependencies>
-		<!-- Spring MVC support -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${springframework.version}</version>
+	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<!--  Spring Security -->
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-    		<artifactId>spring-security-web</artifactId>
-    		<version>${springsecurity.version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		<!--  spring-security-web and spring-security-config -->
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-    		<artifactId>spring-security-config</artifactId>
-    		<version>${springsecurity.version}</version>
-    	</dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
     	<!-- spring security taglibs support -->
     	<dependency>
 			<groupId>org.springframework.security</groupId>
     		<artifactId>spring-security-taglibs</artifactId>
-    		<version>${springsecurity.version}</version>
     	</dependency>
-		<!-- Servlet, JSP and JSTL support -->
+    	<!-- Tomcat embedded container-->
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>javax.servlet.jsp-api</artifactId>
-			<version>2.3.1</version>
-		</dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+		<!-- need this to compile JSP -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <scope>provided</scope>
+        </dependency>
+		<!-- JSTL support -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
-			<version>1.2</version>
 		</dependency>
-        <!-- Spring Transactions -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${springframework.version}</version>
-        </dependency>
-        <!-- Spring ORM -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>${springframework.version}</version>
-        </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
     	<!--  MySQL and C3P0 support -->
     	<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.45</version>
 		</dependency>
 		<dependency>
 			<groupId>com.mchange</groupId>
@@ -79,29 +73,16 @@
     	<dependency>
     		<groupId>org.hibernate.validator</groupId>
     		<artifactId>hibernate-validator</artifactId>
-   			<version>6.0.8.Final</version>
-		</dependency>
-    	<!-- Hibernate ORM -->
-		<dependency>
-    		<groupId>org.hibernate</groupId>
-    		<artifactId>hibernate-core</artifactId>
-    		<version>5.2.15.Final</version>
 		</dependency>
 	</dependencies>
-	<!-- Support for Maven WAR Plugin -->
 	<build>
 		<finalName>save-o-tron</finalName>
 		<pluginManagement>
 			<plugins>
-				<plugin>
-					<!-- Maven coordinates (GAV) for: maven-war-plugin -->
-   				 	<groupId>org.apache.maven.plugins</groupId>
-    				<artifactId>maven-war-plugin</artifactId>
-    				<configuration>
-        				<failOnMissingWebXml>false</failOnMissingWebXml>
-    				</configuration>
-    				<version>3.2.0</version>
-				</plugin>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+					</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
