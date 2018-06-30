@@ -29,8 +29,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan(basePackages="com.wojciechowski.project")
-@PropertySource({"classpath:persistence-mysql.properties",
-				"classpath:security-persistence-mysql.properties"})
+@PropertySource({"classpath:persistence-mysql.properties"})
 public class AppConfig implements WebMvcConfigurer{
 	
 	private Environment env;
@@ -61,12 +60,10 @@ public class AppConfig implements WebMvcConfigurer{
 		logger.info("jdbc.url=" + env.getProperty("jdbc.url"));
 		logger.info("jdbc.user=" + env.getProperty("jdbc.user"));
 		
-		// set database connection properties
 		myDataSource.setJdbcUrl(env.getProperty("jdbc.url"));
 		myDataSource.setUser(env.getProperty("jdbc.user"));
 		myDataSource.setPassword(env.getProperty("jdbc.password"));
 		
-		// set connection pool properties
 		myDataSource.setInitialPoolSize(Integer.parseInt(env.getProperty("connection.pool.initialPoolSize")));
 		myDataSource.setMinPoolSize(Integer.parseInt(env.getProperty("connection.pool.minPoolSize")));
 		myDataSource.setMaxPoolSize(Integer.parseInt(env.getProperty("connection.pool.maxPoolSize")));
@@ -85,33 +82,9 @@ public class AppConfig implements WebMvcConfigurer{
 	public LocalSessionFactoryBean sessionFactory(){
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(myDataSource());
-		sessionFactory.setPackagesToScan(env.getProperty("hibernate.packagesToScan"));
+		sessionFactory.setPackagesToScan(env.getProperty("hibernate.User.PackagesToScan"), env.getProperty("hibernate.Snippet.PackagesToScan"));
 		sessionFactory.setHibernateProperties(getHibernateProperties());
 		return sessionFactory;
-	}
-
-	@Bean
-	public DataSource securityDataSource() {
-		ComboPooledDataSource securityDataSource = new ComboPooledDataSource();
-		try {
-			securityDataSource.setDriverClass(env.getProperty("security.jdbc.driver"));
-		} catch (PropertyVetoException exc) {
-			throw new RuntimeException(exc);
-		}
-		logger.info(">>> jdbc.url=" + env.getProperty("security.jdbc.url"));
-		logger.info(">>> jdbc.user=" + env.getProperty("security.jdbc.user"));
-		
-		//set database connection properties
-		securityDataSource.setJdbcUrl(env.getProperty("security.jdbc.url"));
-		securityDataSource.setUser(env.getProperty("security.jdbc.user"));
-		securityDataSource.setPassword(env.getProperty("security.jdbc.password"));
-		
-		//set connection pool properties
-		securityDataSource.setInitialPoolSize(getIntProperty("security.connection.pool.initialPoolSize"));
-		securityDataSource.setInitialPoolSize(getIntProperty("security.connection.pool.minPoolSize"));
-		securityDataSource.setInitialPoolSize(getIntProperty("security.connection.pool.maxPoolSize"));
-		securityDataSource.setInitialPoolSize(getIntProperty("security.connection.pool.maxIdleTime"));
-		return securityDataSource;
 	}
 	
 	@Bean
@@ -126,13 +99,6 @@ public class AppConfig implements WebMvcConfigurer{
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**")
 				.addResourceLocations("/resources/");
-	}
-
-	//helper method
-	private int getIntProperty(String propName) {
-		String propVal = env.getProperty(propName);
-		int intPropVal= Integer.parseInt(propVal);
-		return intPropVal;
 	}
 	
 }

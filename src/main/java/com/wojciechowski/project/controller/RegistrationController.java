@@ -1,99 +1,69 @@
 package com.wojciechowski.project.controller;
 
-import java.util.List;
+import java.util.logging.Logger;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.wojciechowski.project.user.NormalUser;
+import com.wojciechowski.project.service.UserService;
+import com.wojciechowski.project.user.User;
+
 
 @Controller
 @RequestMapping("/register")
 public class RegistrationController {
 
-	private UserDetailsManager userDetailsManager;
-	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	private UserService userService;
+	private Logger logger = Logger.getLogger(getClass().getName());
 	
 	@Autowired
-	public RegistrationController(UserDetailsManager userDetailsManager) {
-		this.userDetailsManager = userDetailsManager;
+    public RegistrationController(UserService userService) {
+		this.userService = userService;
 	}
 
 	@GetMapping("/show-registration-form")
 	public String showRegistrationForm(Model theModel) {
-		theModel.addAttribute("newUser", new NormalUser());
+		theModel.addAttribute("newUser", new User());
 		return "registration-form";
 	}
 
 	@PostMapping("/process-registration-form")
 	public String processRegistrationForm(
-			@Valid @ModelAttribute("newUser") NormalUser theNewUser,
+			@Valid @ModelAttribute("newUser") User theNewUser,
 			BindingResult theBindingResult,
 			Model theModel) {
 		
-		// form validation, to make sure the user doesn't enter any invalid data
+		String username = theNewUser.getUsername();
+		logger.info("Processing registration form for: " + username);
+		
 		if(theBindingResult.hasErrors()) {
 			return "registration-form";
 		}
 		
-		//  check the database if user already exists
-		if(doesUserExist(theNewUser.getUserName())) {
-			theModel.addAttribute("newUser", new NormalUser());
+		User existing = userService.findByUserName(username);
+		if (existing != null){
+			theModel.addAttribute("newUser", new User());
 			theModel.addAttribute("userAlreadyExistsError",
 					"User with this username already exists.");
+			
+			logger.warning("User name already exists.");
+			
 			return "registration-form";
 		}
 	
-		// encrypt the password, we make use of the BCrypt password encoder created earlier
-		String encodedPassword = passwordEncoder.encode(theNewUser.getPassword());
-		
-		// prepend the encoding algorithm id
-		encodedPassword = "{bcrypt}" + encodedPassword;
-		
-		// give user default role of "user"
-		List<GrantedAuthority> authorities =
-				AuthorityUtils.createAuthorityList("ROLE_USER");
-		
-		// create user details object
-		User tempUser = new User(theNewUser.getUserName(), encodedPassword, authorities);
-		
-		// save user in the database
-		userDetailsManager.createUser(tempUser);
+		userService.save(theNewUser);
+        
+        logger.info("Successfully created user: " + username);
 		
 		return "registration-confirmation";
-	}
-	
-	//	Used in the form validation process. Here we add support to trim empty strings to null.
-	@InitBinder
-	public void initBinder(WebDataBinder dataBinder) {
-		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
-		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
-	}
-	
-	//	This helper method makes use of the userDetailsManager bean that was @Autowired
-	//	earlier in this RegistrationController.
-	private boolean doesUserExist(String userName) {
-		
-		// check the database if the user already exists
-		boolean exists = userDetailsManager.userExists(userName);
-		return exists;
 	}
 
 }

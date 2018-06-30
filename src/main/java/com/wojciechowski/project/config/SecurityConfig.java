@@ -1,69 +1,67 @@
 package com.wojciechowski.project.config;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import com.wojciechowski.project.service.UserService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-	private DataSource securityDataSource;
 	
-	@Autowired
-	public SecurityConfig(DataSource securityDataSource) {
-		this.securityDataSource = securityDataSource;
-	}
+    @Autowired
+    private UserService userService;
 	
 	@Bean
-	public UserDetailsManager userDetailsManager() {
-		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();	
-		jdbcUserDetailsManager.setDataSource(securityDataSource);
-		return jdbcUserDetailsManager;
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public DaoAuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
+		auth.setUserDetailsService(userService); 
+		auth.setPasswordEncoder(passwordEncoder());
+		return auth;
 	}
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication().dataSource(securityDataSource);
-		/**
-		Test authentication
-        auth.inMemoryAuthentication()
-            .withUser("user").password("{noop}password").roles("USER");
-		**/
+		auth.authenticationProvider(authenticationProvider());
 	}
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.authorizeRequests()
-		.antMatchers("/","/more-info","/about-me")
-		.permitAll()
-		.antMatchers("/main","/add-new-snippet","/save-code-snippet",
+		
+	httpSecurity
+		.authorizeRequests()
+			.antMatchers("/","/more-info","/about-me")
+			.permitAll()
+			.antMatchers("/main","/add-new-snippet","/save-code-snippet",
 					"/show-details","/show-edit-form",
 					"/snippet-added-confirmation","/delete",
 					"/snippet-deleted-confirmation")
-		.hasRole("USER")
-		.and()
+			.hasRole("USER")
+			.and()
 		.formLogin()
-		.loginPage("/login-page")
-		.loginProcessingUrl("/authenticate-the-user")
-		.permitAll()
-		.and()
+			.loginPage("/login-page")
+			.loginProcessingUrl("/authenticate-the-user")
+			.permitAll()
+			.and()
 		.logout()
-		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-		.permitAll()
-		.and()
-		.exceptionHandling().accessDeniedPage("/access-denied");
+			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+			.permitAll()
+			.and()
+		.exceptionHandling()
+			.accessDeniedPage("/access-denied");
 	}
 	
 }

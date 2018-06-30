@@ -25,25 +25,47 @@
 					<form:form action="${pageContext.request.contextPath}/register/process-registration-form" 
 						  	   modelAttribute="newUser"
 						  	   class="form-horizontal">
+						  	   
 						<!-- User name -->
 						<div style="margin-bottom: 25px; margin-top: 15px" class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
-							
-							<form:input path="userName" placeholder="username" class="form-control" />
+							<form:input path="username" placeholder="Username (*)" class="form-control" />
 						</div>
 						<c:if test="${userAlreadyExistsError != null}">
 							<div class="alert alert-danger col-xs-offset-1 col-xs-10">
 								${userAlreadyExistsError}
 					    	</div>
 						</c:if>
-						<form:errors path="userName" class="alert alert-danger col-xs-12" />
+						<form:errors path="username" class="alert alert-danger col-xs-12" />
+						
 						<!-- Password -->
 						<div style="margin-bottom: 25px" class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span> 
-							
-							<form:password path="password" placeholder="password" class="form-control" />
+							<form:password path="password" placeholder="Password (*)" class="form-control" />
 						</div>
 						<form:errors path="password"  class="alert alert-danger col-xs-12"/>
+						
+						<!-- First name -->
+						<div style="margin-bottom: 25px" class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
+							<form:input path="firstName" placeholder="First name (*)" class="form-control" />
+						</div>
+						<form:errors path="firstName" class="alert alert-danger col-xs-12" />
+						
+						<!-- Last name -->
+						<div style="margin-bottom: 25px" class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
+							<form:input path="lastName" placeholder="Last name (*)" class="form-control" />
+						</div>
+						<form:errors path="lastName" class="alert alert-danger col-xs-12" />
+						
+						<!-- Email -->
+						<div style="margin-bottom: 25px" class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
+							<form:input path="email" placeholder="Email (*)" class="form-control" />
+						</div>
+						<form:errors path="email" class="alert alert-danger col-xs-12" />
+						
 						<!-- Register Button -->
 						<div style="margin-top: 10px" class="form-group">						
 							<div class="col-sm-6 controls">

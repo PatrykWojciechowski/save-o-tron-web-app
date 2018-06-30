@@ -22,10 +22,10 @@ public class CodeSnippetDAOImpl implements CodeSnippetDAO {
 	}
 	
 	@Override
-	public List<CodeSnippet> getCodeSnippets(String username) {
+	public List<CodeSnippet> getCodeSnippets(Long user_id) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query query = currentSession.createQuery("from CodeSnippet where username = :username order by updateTime desc");
-		List<CodeSnippet> codeSnippets = query.setParameter("username", username).getResultList();
+		Query query = currentSession.createQuery("from CodeSnippet where user_id = :user_id order by updateTime desc");
+		List<CodeSnippet> codeSnippets = query.setParameter("user_id", user_id).getResultList();
 		return codeSnippets;
 	}
 
