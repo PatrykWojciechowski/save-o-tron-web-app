@@ -15,7 +15,7 @@ The application was developed from scratch in Spring framework (full Java config
 
 This application is available for the tests now!(hosted on AWS Elastic Beanstalk and Amazon RDS)  
 To test the app, click on the link below!  
-Save-o-tron online (disabled atm)
+Save-o-tron online (disabled atm)  
 For the tests you can log in as:
 - username -> admin
 - password -> admin  
